@@ -3,14 +3,20 @@ data "archive_file" "lambda_zip" {
     source_file   = "${path.module}/rds_mysql_db_snapshot.py"
     output_path   = "${path.module}/rds_mysql_db_snapshot.zip"
 }
+
+resource "aws_s3_bucket" "mybucket" {
+  bucket = "krishnamaramdrbucket"
+  acl    = "private"
+}
+
 resource "aws_s3_bucket_object" "this" {
- bucket = "krishnamaramq22"
+ bucket = aws_s3_bucket.mybucket.id
  key    = "rds_mysql_db_snapshot.zip"
  source = "${path.module}/rds_mysql_db_snapshot.zip"
 }
 resource "aws_lambda_function" "test_lambda" {
   #filename         = "${path.module}/test.zip}"
-  s3_bucket = "krishnamaramq22"
+  s3_bucket = aws_s3_bucket.mybucket.id
   s3_key = "rds_mysql_db_snapshot.zip"
   function_name    = "create_rds_mysql_db_snapshot"
   role             = "${aws_iam_role.iam_role_for_lambda.arn}"
