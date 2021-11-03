@@ -1,5 +1,3 @@
-sh export.sh
-
 $git clone https://github.com/cssporg/dr.git
 
 cd dr
