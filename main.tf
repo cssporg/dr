@@ -1,7 +1,7 @@
 ########################################  Importing  modules #################################
 
 module "computing"{
-source = "./modules/computing/lambda"
+source = "./modules/computing/lambda/functions/rds"
 websg = "${module.security.websg}"
 privatesubnet = "${module.networking.appsubnet}"
 }
