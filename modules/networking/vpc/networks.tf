@@ -47,10 +47,10 @@ destination_cidr_block = "0.0.0.0/0"
 gateway_id = "${aws_internet_gateway.myigw.id}"
 }
  
-#resource "aws_route_table_association" "publicrtba1"{
-#route_table_id = "${aws_route_table.publicrtb1.id}"
-#subnet_id = "${aws_subnet.publicsubnet1.id}"
-#}
+resource "aws_route_table_association" "publicrtba"{
+route_table_id = "${aws_route_table.publicrtb.id}"
+subnet_id = "${aws_subnet.lbsubnet.id}"
+}
 
 ############################################ Private Subnets ###############################3
 
@@ -78,3 +78,7 @@ nat_gateway_id = "${aws_nat_gateway.myngw.id}"
 }
 
 
+resource "aws_route_table_association" "privatertba"{
+route_table_id = "${aws_route_table.privatertb.id}"
+subnet_id = "${aws_subnet.appsubnet.id}"
+}

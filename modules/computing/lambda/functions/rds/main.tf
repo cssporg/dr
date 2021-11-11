@@ -5,7 +5,7 @@ data "archive_file" "lambda_zip" {
 }
 
 resource "aws_s3_bucket" "mybucket" {
-  bucket = "krishnamaramdrbucket"
+  bucket = "krishnamarammydrbucket"
   acl    = "private"
 }
 
